@@ -42,3 +42,22 @@ var Person = (function(){
 Person.getName();
 Person.increatmentAge();
 Person.getAge();
+
+//包含命名空间、公有、私有变量的module模式：
+var myNameSpace = (function(){
+  //私有变量
+  var myPrivateVar = 0;
+  //私有函数
+  var privateMethod = function(){
+    console.log('privateMethod');
+  };
+  return {
+    // 公有变量
+    myPublicVar: 'public',
+    //调用私有变量和方法的公有函数
+    myPublicMethod: function(){
+      ++myPrivateVar;
+      privateMethod();
+    }
+  }
+})()
