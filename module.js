@@ -60,4 +60,31 @@ var myNameSpace = (function(){
       privateMethod();
     }
   }
-})()
+})();
+
+//引入，比如引入jquery并在本地取个别名
+var myModule = (function(JQ){
+  function privateMethod(){
+      JQ(".info").html("info");
+  }
+  return {
+      publicMethod: function(){
+        this.privateMethod();
+      }
+  }
+})(jQuery);
+myModule.publicMethod();
+
+//引出
+var myModule = function(){
+  var module = {}, privateVar = "hello";
+  function privateMethod(){
+    console.log(privateVar);
+  };
+  module.publicVar = "hi";
+  module.publicMethod = function(){
+    console.log(privateVar)
+  }
+  return module;
+}
+myModule.module.publicMethod();
