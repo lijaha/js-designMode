@@ -88,3 +88,26 @@ var myModule = function(){
   return module;
 }
 myModule.module.publicMethod();
+
+//揭示模式，优点：可读性好，在模块底部容易指出哪些函数和变量可以被公开访问
+var myRevealingModule = function(){
+  var privateVar = "privateName";
+  var publicVar = "publicVar";
+  function privateMethod(){
+    console.log("Name: " + privateVar);
+  }
+  function publicSetName(newName){
+    privateVar = newName;
+  }
+  function publicGetName(){
+    privateMethod();
+  }
+//将暴露的公有指针指向到私有函数和属性上
+  return {
+    setName: publicSetName,
+    getName: publicGetName,
+    greeting: publicVar
+  };
+}();
+myRevealingModule.getName();
+myRevealingModule.setName('lijaha');
